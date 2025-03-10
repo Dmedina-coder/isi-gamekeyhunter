@@ -16,8 +16,8 @@ strResult=""
 token_url= "https://sandboxapi.g2a.com/oauth/token"
 
 #escribe aqui las credenciales de g2a
-g2a_cli = "ibHtsEljmCxjOFAn"
-g2a_secret = "HrsPmuOlWjqBMHnQWIgfchUqBTBYcRph"
+g2a_cli = ""
+g2a_secret = ""
 
 token2_url = "https://api.isthereanydeal.com"
 
