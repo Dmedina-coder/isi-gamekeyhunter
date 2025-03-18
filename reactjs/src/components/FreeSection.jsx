@@ -53,43 +53,37 @@ function FreeSection() {
         }
 
         .news-article {
-          background-color: rgba(2, 56, 68, 1);
-          position: relative;
           display: flex;
-          min-height: 433px;
           flex-direction: column;
-          align-items: start;
-          font-size: 20px;
-          color: rgba(255, 255, 255, 1);
-          font-weight: 400;
-          line-height: 30px;
-          justify-content: start;
+          align-items: center;
         }
 
         .news-image {
-          aspect-ratio: 0.69;
-          object-fit: contain;
-          object-position: center;
-          width: 257px;
-          position: absolute;
-          z-index: 0;
           max-width: 100%;
-          left: 25px;
-          top: 28px;
-          height: 375px;
+          height: auto;
+          max-height: 300px; /* Limit the height of the image */
         }
 
         .news-content {
-          position: absolute;
-          z-index: 0;
-          min-height: 375px;
-          width: 50%;
-          min-width: 50%;
-          max-width: 100%;
-          right: 47px;
-          top: 28px;
-          height: 375px;
-          margin: 0;
+          width: 100%;
+          text-align: justify;
+          color: white; /* Change text color to white */
+          font-size: 22px; /* Increase font size */
+        }
+
+        @media (min-width: 768px) {
+          .news-article {
+            flex-direction: row;
+          }
+
+          .news-image {
+            flex: 1;
+            margin-right: 20px;
+          }
+
+          .news-content {
+            flex: 2;
+          }
         }
 
         @media (max-width: 991px) {
