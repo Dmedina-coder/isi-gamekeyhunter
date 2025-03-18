@@ -40,6 +40,7 @@ function StoreRecommendation({ storeName, platform, price, storeLogoUrl, platfor
         .store-info {
           display: flex;
           padding: 24px 20px;
+          pading-Right: 0px;
           margin-bottom: 22px;
           background-color: #023844;
         }

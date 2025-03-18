@@ -21,6 +21,7 @@ function GameList({ title, games, className }) {
           margin-top: 20px;
           width: 100%;
           padding-bottom: 23px;
+          padding-top: 23px;
           flex-direction: column;
           overflow: hidden;
           align-items: stretch;

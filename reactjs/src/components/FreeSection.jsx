@@ -61,6 +61,8 @@ function FreeSection() {
         .news-image {
           max-width: 100%;
           height: auto;
+          aspect-ratio: 10 / 16; /* Maintain a 16:9 aspect ratio */
+          object-position: center; /* Center the image */
           max-height: 300px; /* Limit the height of the image */
         }
 

@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { useParams } from "react-router-dom"; // Import useParams from React Router
 import Header from "../components/Header";
 import GameInfo from "../components/GameInfo";
 import StoreRecommendation from "../components/StoreRecommendation";
@@ -7,6 +8,7 @@ import StoreList from "../components/StoreList";
 import Footer from "../components/Footer";
 
 function GameDetailsPage() {
+  const { gameid } = useParams(); // Get the 'gameid' parameter from the URL
   return (
     <>
       <link
@@ -17,7 +19,7 @@ function GameDetailsPage() {
         <Header />
         <main className="main-content">
           <GameInfo
-            title="Nombre Videojuego"
+            title={gameid}
             platform="Plataforma"
             releaseDate="Fecha lanzamiento"
             description="Proin cursus eros velit, at venenatis leo elementum quis. Quisque a elit sodales, tincidunt massa eget, commodo justo. Sed ut magna ipsum. In interdum a ex eget condimentum. Pellentesque ligula erat, imperdiet in iaculis vitae, hendrerit et justo. Etiam vel facilisis sem. Quisque accumsan non dolor sit amet finibus. Mauris nec mauris turpis."

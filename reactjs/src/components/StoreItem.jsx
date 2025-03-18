@@ -23,7 +23,8 @@ function StoreItem({ storeName, platform, price, storeLogoUrl, platformLogoUrl }
       <style jsx>{`
         .store-item {
           display: flex;
-          padding: 24px 20px;
+          padding: 24px 24px;
+          padding-Right: 0px;
           margin-bottom: 22px;
           background-color: #023844;
         }
@@ -40,8 +41,18 @@ function StoreItem({ storeName, platform, price, storeLogoUrl, platformLogoUrl }
         .store-name {
           color: #c5c5c5;
           font-family: "Inter", sans-serif;
-          font-size: 36px;
+          font-size: 20px;
           font-weight: 700;
+          font-family:
+            Inter,
+            -apple-system,
+            Roboto,
+            Helvetica,
+            sans-serif;
+          font-weight: 600;
+          letter-spacing: -0.96px;
+          margin: 0; /* Remove auto margins */
+          text-align: left; /* Align text to the left */
         }
         .platform-details {
           display: flex;
@@ -55,19 +66,35 @@ function StoreItem({ storeName, platform, price, storeLogoUrl, platformLogoUrl }
           border: 1px solid #433b3b;
         }
         .platform-name {
-          color: #c5c5c5;
+ color: #c5c5c5;
           font-family: "Inter", sans-serif;
-          font-size: 36px;
+          font-size: 20px;
           font-weight: 700;
+          font-family:
+            Inter,
+            -apple-system,
+            Roboto,
+            Helvetica,
+            sans-serif;
+          font-weight: 600;
+          letter-spacing: -0.96px;
+          margin: 0; /* Remove auto margins */
+          text-align: left; /* Align text to the left */
         }
         .price {
-          margin-left: auto;
           color: #fff;
           font-family: "Inter", sans-serif;
-          font-size: 40px;
+          font-size: 16px;
           font-weight: 700;
-          padding: 20px 32px;
+          width: 80px;
+          height: 100%;
+          padding: 20px 20px;
           background-color: #000;
+          clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%); /* Creates a diagonal left border */
+          text-align: right; /* Align text to the right */
+          display: flex;
+          align-items: center;
+          justify-content: flex-end; /* Ensure content is aligned to the right */
         }
         @media (max-width: 991px) {
           .platform-details {

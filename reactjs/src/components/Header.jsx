@@ -1,30 +1,44 @@
 "use client";
 import React, { useState } from "react";
-import logo from "../media/Logo_web.png"; // Import the new logo image
-import banner from "../media/Banner_web.png"; // Import the new banner image
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import logo from "../media/Logo_web.png"; // Import the logo image
+import banner from "../media/Banner_web.png"; // Import the banner image
 
 function Header() {
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const handleInputChange = (event) => {
     setSearchText(event.target.value);
   };
 
+  const handleSearchSubmit = (event) => {
+    event.preventDefault(); // Prevent the default form submission
+    if (searchText.trim() !== "") {
+      const formattedSearchText = searchText.toLowerCase().replace(/\s+/g, "-"); // Format the search text
+      navigate(`/game-details/${formattedSearchText}`); // Redirect to the GameDetails page
+    }
+  };
+
   return (
     <header className="header">
       <div className="logo-container">
-        <img
-          src={logo}
-          alt="Logo"
-          className="logo"
-        />
-        <img
-          src={banner}
-          alt="Logo text"
-          className="logo-text"
-        />
+        <Link to="/"> {/* Make the logo a link to Home */}
+          <img
+            src={logo}
+            alt="Logo"
+            className="logo"
+          />
+        </Link>
+        <Link to="/"> {/* Make the banner a link to Home */}
+          <img
+            src={banner}
+            alt="Logo text"
+            className="logo-text"
+          />
+        </Link>
       </div>
-      <div className="search-bar">
+      <form className="search-bar" onSubmit={handleSearchSubmit}>
         <div className="search-layer">
           <input
             type="text"
@@ -33,7 +47,7 @@ function Header() {
             value={searchText}
             onChange={handleInputChange}
           />
-          <div className="search-icon-container">
+          <button type="submit" className="search-icon-container">
             <div className="icon-wrapper">
               <div className="icon-inner">
                 <img
@@ -43,9 +57,9 @@ function Header() {
                 />
               </div>
             </div>
-          </div>
+          </button>
         </div>
-      </div>
+      </form>
 
       <style jsx>{`
         .header {
@@ -57,42 +71,38 @@ function Header() {
 
         .logo-container {
           display: flex;
+          align-items: center; /* Align items vertically */
+          justify-content: space-between; /* Add spacing between logo and banner */
           width: 100%;
           max-width: 1146px;
-          align-items: stretch;
-          gap: 40px 76px;
-          flex-wrap: wrap;
+          gap: 20px; /* Adjust gap between logo and banner */
         }
 
         .logo {
           aspect-ratio: 2.03;
           object-fit: contain;
           object-position: center;
-          width: 130px;
-          margin: auto 0;
+          height: 80px; /* Set a consistent height */
           flex-shrink: 0;
-          max-width: 100%;
         }
 
         .logo-text {
           aspect-ratio: 7.35;
           object-fit: contain;
           object-position: center;
-          width: 80%;
-          flex-grow: 1;
+          height: 150px; /* Increased height for the banner */
           flex-shrink: 0;
-          flex-basis: 0;
         }
 
         .search-bar {
-          justify-content: center;
+          justify-content: start; /* Align items to the left */
           align-items: stretch;
           border-radius: 28px;
           background-color: #fff;
           display: flex;
-          margin: 18px 20px; /* Added margin to the sides */
+          margin: 1px 0; /* Remove horizontal centering */
           min-height: 61px;
-          width: calc(100% - 40px); /* Adjusted width to account for margin */
+          width: 95%; /* Adjusted width of the search bar */
           gap: 4px;
           overflow: hidden;
         }
@@ -146,6 +156,9 @@ function Header() {
           align-items: right;
           justify-content: end;
           width: 48px;
+          border: none;
+          background: none;
+          cursor: pointer;
         }
 
         .icon-wrapper {
@@ -196,11 +209,15 @@ function Header() {
           }
 
           .logo {
-            width: 100px; /* Adjust logo size for smaller screens */
+            height: 60px; /* Adjust logo size for smaller screens */
           }
 
-          .search-layer {
-            max-width: 100%;
+          .logo-text {
+            height: 120px; /* Adjust banner size for smaller screens */
+          }
+
+          .search-bar {
+            width: 95%; /* Adjusted width for smaller screens */
           }
 
           .search-input {
@@ -210,9 +227,8 @@ function Header() {
           }
 
           .search-bar {
-            margin: 10px 10px; /* Adjusted margin for smaller screens */
+            margin: 10px 0; /* Remove horizontal centering */
             min-height: 50px;
-            width: calc(100% - 20px); /* Adjusted width to account for margin */
           }
 
           .search-icon-container {
@@ -235,22 +251,34 @@ function Header() {
 
         @media (max-width: 600px) {
           .logo {
-            width: 80px; 
+            height: 50px; /* Adjust logo size for even smaller screens */
+          }
+
+          .logo-text {
+            height: 100px; /* Adjust banner size for even smaller screens */
+            display: none; /* Hide the banner text */
+          }
+
+          .search-bar {
+            width: 90%; /* Allow the search bar to adjust to its content */
+            min-width: 240px; /* Ensure it matches the minimum width of .search-input */
+            background-color: rgba(239, 238, 227, 1);
           }
 
           .search-input {
             font-size: 18px;
             margin: 2px;
+            min-height: 30px;
           }
 
           .search-bar {
-            margin: 5px 5px; 
-            min-height: 40px;
-            width: calc(100% - 10px); 
+            margin: 5px 0; /* Remove horizontal centering */
+            min-height: 30px;
           }
 
           .search-icon-container {
             width: 30px;
+            display: none;
           }
 
           .icon-wrapper {

@@ -1,35 +1,48 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link from React Router
 
 function GameCard({ title, price, image }) {
+  const formattedTitle = title.toLowerCase().replace(/\s+/g, "-"); // Format title for URL
+
   return (
-    <article className="game-card">
-      <div className="game-info">
-        <div className="game-content">
-          <div className="image-column">
-            <img src={image} alt={title} className="game-image" />
-          </div>
-          <div className="title-column">
-            <h3 className="game-title">{title}</h3>
+    <Link to={`/game-details/${formattedTitle}`} className="game-card-link">
+      <article className="game-card">
+        <div className="game-info">
+          <div className="game-content">
+            <div className="image-column">
+              <img src={image} alt={title} className="game-image" />
+            </div>
+            <div className="title-column">
+              <span className="game-title">{title}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="price-container">
-        <div className="price-button">{price}</div>
-      </div>
+        <div className="price-container">
+          <div className="price-button">{price}</div>
+        </div>
+      </article>
 
       <style jsx>{`
+        .game-card-link {
+          text-decoration: none; /* Remove underline from the link */
+          color: inherit; /* Inherit text color */
+        }
+
         .game-card {
           background-color: rgba(2, 56, 68, 1);
           display: flex;
           width: 100%;
-          padding-left: 13px;
-          padding-top: 1px;
-          padding-bottom: 1px;
+          max-height: 100px; /* Limit the height of the card */
+          padding: 0;
           align-items: stretch;
-          gap: 40px 100px;
           overflow: hidden;
           flex-wrap: wrap;
           margin-bottom: 20px;
+          transition: transform 0.2s ease; /* Add hover effect */
+        }
+
+        .game-card:hover {
+          transform: scale(1.02); /* Slightly enlarge on hover */
         }
 
         .game-info {
@@ -40,8 +53,11 @@ function GameCard({ title, price, image }) {
         }
 
         .game-content {
-          gap: 20px;
           display: flex;
+          flex-direction: row; /* Ensure the image and text are side by side */
+          align-items: center; /* Align items vertically */
+          gap: 20px; /* Space between the image and text */
+          height: 100%; /* Ensure the content takes the full height of the card */
         }
 
         .image-column {
@@ -49,32 +65,35 @@ function GameCard({ title, price, image }) {
           flex-direction: column;
           align-items: stretch;
           line-height: normal;
-          width: 38%;
+          max-width: 20%; /* Adjusted width for the image */
+          height: 100%; /* Ensure the image column takes the full height */
           margin-left: 0px;
         }
 
         .game-image {
           aspect-ratio: 1.46;
-          object-fit: contain;
-          object-position: center;
-          width: 172px;
+          object-fit: cover; /* Ensure the image covers the container */
+          object-position: center; /* Center the image */
+          height: 100%; /* Ensure the image takes the full height of its container */
+          max-height: 100px; /* Limit the height of the card */
           flex-shrink: 0;
-          max-width: 100%;
-          flex-grow: 1;
         }
 
         .title-column {
           display: flex;
           flex-direction: column;
-          align-items: stretch;
+          align-items: flex-start; /* Align text to the left */
           line-height: normal;
-          width: 62%;
-          margin-left: 20px;
+          width: 70%; /* Adjusted width for the text */
+          margin-left: 0px; /* Remove extra margin */
+          overflow: hidden; /* Prevent text overflow */
+          text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+          white-space: nowrap; /* Prevent text from wrapping */
         }
 
         .game-title {
           color: rgba(197, 197, 197, 1);
-          font-size: 48px;
+          font-size: 20px; /* Adjust font size to fit within the limited height */
           font-family:
             Inter,
             -apple-system,
@@ -83,40 +102,42 @@ function GameCard({ title, price, image }) {
             sans-serif;
           font-weight: 600;
           letter-spacing: -0.96px;
-          margin: auto 0;
-          align-self: stretch;
+          margin: 0; /* Remove auto margins */
+          text-align: left; /* Align text to the left */
         }
 
         .price-container {
           display: flex;
-          min-height: 136px;
-          align-items: center;
-          gap: 24px;
+          min-height: 100px;
+          height: 100%; /* Ensure it takes the full height of the card */
+          align-items: stretch; /* Stretch children to match the container's height */
+          background-color: rgba(0, 0, 0, 1);
+          gap: 16px; /* Reduced gap */
           font-family:
             Inter,
             -apple-system,
             Roboto,
             Helvetica,
             sans-serif;
-          font-size: 40px;
+          font-size: 16px; /* Adjust font size */
           color: rgba(255, 255, 255, 1);
           font-weight: 700;
-          white-space: nowrap;
           justify-content: end;
+          clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%); /* Creates a diagonal left border */
         }
 
         .price-button {
-          align-self: stretch;
           box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
           background-color: #000;
           margin: auto 0;
-          min-height: 136px;
-          width: 199px;
-          padding: 38px 23px 38px 32px;
+          height: 100%; /* Occupy the full height of the container */
+          width: 80px; /* Adjust width */
+          padding: 10px; /* Adjust padding */
+          margin-right: 10px; /* Add margin to the right */
           gap: 8px;
           display: flex;
-          align-items: center;
-          justify-content: center;
+          align-items: right;
+          justify-content: right;
         }
 
         @media (max-width: 991px) {
@@ -161,7 +182,7 @@ function GameCard({ title, price, image }) {
           }
         }
       `}</style>
-    </article>
+    </Link>
   );
 }
 

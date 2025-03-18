@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import img from "../media/Game.webp";
+
 import Header from "../components/Header";
 //import Slider from "./Slider";
 import NewsSection from "../components/FreeSection";
@@ -12,38 +14,33 @@ function Home() {
   const topSearchedGames = [
     {
       id: 1,
-      title: "Lorem Ipsum",
-      price: "99.99€",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/ed5aa7439cd9d9ff3a864c3dac10325030bd741d4780ac40458f0d3318610f95?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5",
+      title: "Minecraft",
+      price: "9.99€",
+      image:img,
     },
     {
       id: 2,
-      title: "Lorem Ipsum",
+      title: "Assassins Creed",
       price: "99.99€",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/ed5aa7439cd9d9ff3a864c3dac10325030bd741d4780ac40458f0d3318610f95?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5",
+      image:img,
     },
     {
       id: 3,
-      title: "Lorem Ipsum",
-      price: "99.99€",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/ed5aa7439cd9d9ff3a864c3dac10325030bd741d4780ac40458f0d3318610f95?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5",
+      title: "Counter",
+      price: "199.99€",
+      image:img,
     },
     {
       id: 4,
-      title: "Lorem Ipsum",
+      title: "League of Legends",
       price: "99.99€",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/ed5aa7439cd9d9ff3a864c3dac10325030bd741d4780ac40458f0d3318610f95?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5",
+      image:img,
     },
     {
       id: 5,
-      title: "Lorem Ipsum",
+      title: "Assasins creed valhalla",
       price: "99.99€",
-      image:
-        "https://cdn.builder.io/api/v1/image/assets/TEMP/ed5aa7439cd9d9ff3a864c3dac10325030bd741d4780ac40458f0d3318610f95?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5",
+      image:img,
     },
   ];
 
@@ -95,7 +92,7 @@ function Home() {
         className="top-searched"
       />
       <GameList
-        title="TOP 5 UTLIMOS BUSCADOS"
+        title="TOP 5 ULTIMOS BUSCADOS"
         games={latestSearchedGames}
         className="latest-searched"
       />
