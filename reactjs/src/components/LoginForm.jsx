@@ -18,7 +18,6 @@ function LoginForm() {
             <label className="input-label">Password</label>
             <input
               type="password"
-              value="*******"
               className="password-input"
             />
           </div>

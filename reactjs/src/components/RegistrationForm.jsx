@@ -1,9 +1,20 @@
 "use client";
-import React from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegistrationForm() {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = () => {
+    if (password === confirmPassword) {
+      navigate("/form");
+    } else {
+      setError("Las contraseñas no coinciden");
+    }
+  };
 
   return (
     <section className="form-section">
@@ -23,7 +34,8 @@ function RegistrationForm() {
             <input
               id="password"
               type="password"
-              value="******"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="password-input"
             />
           </div>
@@ -32,15 +44,17 @@ function RegistrationForm() {
             <input
               id="confirm-password"
               type="password"
-              value="******"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className="password-input"
             />
           </div>
-          <button className="submit-button" onClick={() => navigate("/form")}>
+          {error && <p className="error-message">{error}</p>}
+          <button className="submit-button" onClick={handleSubmit}>
             Registrarse
           </button>
-          </div>
         </div>
+      </div>
       <style jsx>{`
         .form-section {
           width: 90%;
@@ -78,8 +92,8 @@ function RegistrationForm() {
 
         .email-input,
         .password-input {
-          width: auto; /* Asegura que todos tengan el mismo ancho */
-          padding: 12px; /* Igual padding para inputs y botón */
+          width: auto;
+          padding: 12px;
           border-radius: 8px;
           font-size: 16px;
           border: 1px solid rgba(255, 255, 255, 0.12);
@@ -88,14 +102,19 @@ function RegistrationForm() {
         }
 
         .submit-button {
-          width: 100%; /* Asegura que todos tengan el mismo ancho */
-          padding: 12px; /* Igual padding para inputs y botón */
+          width: 100%;
+          padding: 12px;
           border-radius: 8px;
           font-size: 16px;
           background-color: rgba(255, 255, 255, 0.12);
           color: rgba(245, 245, 245, 1);
           border: none;
           cursor: pointer;
+        }
+
+        .error-message {
+          color: red;
+          font-size: 14px;
         }
 
         @media (max-width: 980px) {
