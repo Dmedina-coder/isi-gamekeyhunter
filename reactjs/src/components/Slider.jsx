@@ -1,119 +1,120 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
-function Slider({ banners }) {
+function Slider() {
+  // Array of slide images
+  const slides = [
+    {
+      id: 1,
+      src: "https://cdn.allkeyshop.com/images/tiles/slide1.webp?v=1742405609",
+      alt: "Featured game 1",
+    },
+    {
+      id: 2,
+      src: "https://cdn.allkeyshop.com/images/tiles/slide6.webp?v=1742405611", // Using https://cdn.builder.io/api/v1/image/assets/TEMP/b6f2b8a4adc210b26c6d939be18c9e7f69a68b01f26c905ebe2f34c43728b5ef?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5 as placeholder for second image
+      alt: "Featured game 2",
+    },
+    {
+      id: 3,
+      src: "https://cdn.allkeyshop.com/images/tiles/slide4.webp?v=1742405606", // Using https://cdn.builder.io/api/v1/image/assets/TEMP/19ae72ff2779f2f6cd1fd9d5b06347885049c82c8534d15be4b89ace8d3e32a2?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5 as placeholder for third image
+      alt: "Featured game 3",
+    },
+    {
+      id: 4,
+      src: "https://cdn.allkeyshop.com/images/tiles/slide3.webp?v=1742405613", // Using https://cdn.builder.io/api/v1/image/assets/TEMP/ed5aa7439cd9d9ff3a864c3dac10325030bd741d4780ac40458f0d3318610f95?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5 as placeholder for fourth image
+      alt: "Featured game 4",
+    },
+  ];
+
+  // State for current slide index
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  // State for auto-play
+  const [autoPlay, setAutoPlay] = useState(true);
 
-  const totalSlides = banners.length;
-
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
-  }, [totalSlides]);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
-  }, [totalSlides]);
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-    // Reset auto-play timer when manually changing slides
-    if (isAutoPlaying) {
-      setIsAutoPlaying(false);
-      setTimeout(() => setIsAutoPlaying(true), 100);
-    }
+  // Function to go to next slide
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
-  // Auto-play functionality
+  // Function to go to previous slide
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  // Function to go to a specific slide
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  // Auto-play effect
   useEffect(() => {
-    let interval;
-    if (isAutoPlaying) {
-      interval = setInterval(() => {
+    let slideInterval;
+
+    if (autoPlay) {
+      slideInterval = setInterval(() => {
         nextSlide();
       }, 5000); // Change slide every 5 seconds
     }
 
+    // Clean up interval on component unmount or when autoPlay changes
     return () => {
-      if (interval) clearInterval(interval);
+      if (slideInterval) {
+        clearInterval(slideInterval);
+      }
     };
-  }, [isAutoPlaying, nextSlide]);
+  }, [autoPlay, currentSlide]);
 
-  // Pause auto-play when user hovers over the slider
-  const handleMouseEnter = () => setIsAutoPlaying(false);
-  const handleMouseLeave = () => setIsAutoPlaying(true);
+  // Pause auto-play when user interacts with controls
+  const handleControlInteraction = (callback) => {
+    return () => {
+      setAutoPlay(false); // Pause auto-play
+      callback(); // Execute the provided callback (prev/next/goToSlide)
+
+      // Resume auto-play after 10 seconds of inactivity
+      setTimeout(() => {
+        setAutoPlay(true);
+      }, 10000);
+    };
+  };
 
   return (
-    <section
-      className="slider"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <section className="slider">
       <div className="carousel-container">
         <div
-          className="carousel-track"
+          className="slides-container"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {banners.map((banner, index) => (
-            <div className="carousel-slide" key={index}>
-              <img
-                src={banner.image}
-                alt={banner.alt || "Promotional banner"}
-                className="slider-image"
-              />
+          {slides.map((slide) => (
+            <div className="slide" key={slide.id}>
+              <img src={slide.src} className="slider-image" alt={slide.alt} />
             </div>
           ))}
         </div>
 
+        {/* Navigation arrows */}
         <button
-          className="carousel-button prev-button"
-          onClick={prevSlide}
+          className="carousel-control prev-button"
+          onClick={handleControlInteraction(prevSlide)}
           aria-label="Previous slide"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15 18L9 12L15 6"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          &#10094;
         </button>
 
         <button
-          className="carousel-button next-button"
-          onClick={nextSlide}
+          className="carousel-control next-button"
+          onClick={handleControlInteraction(nextSlide)}
           aria-label="Next slide"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9 6L15 12L9 18"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          &#10095;
         </button>
 
-        <div className="carousel-indicators">
-          {banners.map((_, index) => (
+        {/* Slide indicators */}
+        <div className="indicators">
+          {slides.map((_, index) => (
             <button
               key={index}
-              className={`indicator-dot ${index === currentSlide ? "active" : ""}`}
-              onClick={() => goToSlide(index)}
+              className={`indicator ${index === currentSlide ? "active" : ""}`}
+              onClick={handleControlInteraction(() => goToSlide(index))}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
@@ -134,13 +135,13 @@ function Slider({ banners }) {
           overflow: hidden;
         }
 
-        .carousel-track {
+        .slides-container {
           display: flex;
           transition: transform 0.5s ease-in-out;
           width: 100%;
         }
 
-        .carousel-slide {
+        .slide {
           min-width: 100%;
           flex: 1 0 100%;
         }
@@ -150,27 +151,30 @@ function Slider({ banners }) {
           object-fit: contain;
           object-position: center;
           width: 100%;
+          display: block;
         }
 
-        .carousel-button {
+        .carousel-control {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
           background-color: rgba(0, 0, 0, 0.5);
+          color: white;
           border: none;
           border-radius: 50%;
-          width: 40px;
-          height: 40px;
+          width: 50px;
+          height: 50px;
+          font-size: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           opacity: 0.7;
-          transition: opacity 0.3s ease;
-          z-index: 2;
+          transition: opacity 0.3s;
+          z-index: 10;
         }
 
-        .carousel-button:hover {
+        .carousel-control:hover {
           opacity: 1;
         }
 
@@ -182,28 +186,28 @@ function Slider({ banners }) {
           right: 20px;
         }
 
-        .carousel-indicators {
+        .indicators {
           position: absolute;
           bottom: 20px;
           left: 50%;
           transform: translateX(-50%);
           display: flex;
-          gap: 8px;
-          z-index: 2;
+          gap: 10px;
+          z-index: 10;
         }
 
-        .indicator-dot {
+        .indicator {
           width: 12px;
           height: 12px;
           border-radius: 50%;
           background-color: rgba(255, 255, 255, 0.5);
           border: none;
           cursor: pointer;
-          transition: background-color 0.3s ease;
+          transition: background-color 0.3s;
           padding: 0;
         }
 
-        .indicator-dot.active {
+        .indicator.active {
           background-color: white;
         }
 
@@ -216,9 +220,10 @@ function Slider({ banners }) {
             max-width: 100%;
           }
 
-          .carousel-button {
-            width: 32px;
-            height: 32px;
+          .carousel-control {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
           }
 
           .prev-button {
@@ -228,10 +233,22 @@ function Slider({ banners }) {
           .next-button {
             right: 10px;
           }
+        }
 
-          .indicator-dot {
-            width: 10px;
-            height: 10px;
+        @media (max-width: 576px) {
+          .carousel-control {
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+          }
+
+          .indicators {
+            bottom: 10px;
+          }
+
+          .indicator {
+            width: 8px;
+            height: 8px;
           }
         }
       `}</style>

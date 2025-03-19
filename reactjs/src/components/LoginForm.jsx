@@ -7,14 +7,13 @@ function LoginForm() {
       <div className="form-container">
         <div className="form-fields">
           <div className="input-group">
-            <label className="input-label">Email</label>
+            <label htmlFor="email" className="input-label">Email</label>
             <input
               type="email"
               placeholder="Ejemplo@email.com"
               className="email-input"
             />
           </div>
-
           <div className="input-group">
             <label className="input-label">Password</label>
             <input
@@ -23,14 +22,12 @@ function LoginForm() {
               className="password-input"
             />
           </div>
-
           <button className="signin-button">Sign In</button>
-
           <div className="links-container">
-            <a href="#" className="form-link">
+            <a href="/registration" className="form-link" >
               Forgot password?
             </a>
-            <a href="#" className="form-link">
+            <a href="/registration" className="form-link">
               ¿No tienes Cuenta? Registrate
             </a>
           </div>
@@ -39,13 +36,11 @@ function LoginForm() {
 
       <style jsx>{`
         .form-section {
-          width: 100%;
-          max-width: 1342px;
+          width: 90%;
           margin-left: auto;
           margin-right: auto;
           background-color: #023844;
           border-radius: 16px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
           padding: 48px;
         }
 
@@ -76,21 +71,21 @@ function LoginForm() {
 
         .email-input,
         .password-input {
-          width: 100%;
-          padding: 12px 16px;
+          width: auto; /* Asegura que todos tengan el mismo ancho */
+          padding: 12px; /* Igual padding para inputs y botón */
           border-radius: 8px;
+          font-size: 16px;
           border: 1px solid rgba(255, 255, 255, 0.12);
           background-color: #ffffff;
-          font-size: 16px;
           color: rgba(179, 179, 179, 1);
         }
 
         .signin-button {
-          width: 100%;
-          padding: 12px;
-          background-color: rgba(255, 255, 255, 0.12);
+          width: 100%; /* Asegura que todos tengan el mismo ancho */
+          padding: 12px; /* Igual padding para inputs y botón */
           border-radius: 8px;
           font-size: 16px;
+          background-color: rgba(255, 255, 255, 0.12);
           color: rgba(245, 245, 245, 1);
           border: none;
           cursor: pointer;
@@ -106,6 +101,23 @@ function LoginForm() {
           font-size: 16px;
           color: rgba(245, 245, 245, 1);
           text-decoration-line: underline;
+        }
+
+        @media (max-width: 980px) {
+          .form-section {
+            padding: 30px;
+          }
+          .main-content {
+            width: 90%;
+          }
+        }
+        @media (max-width: 640px) {
+          .form-section {
+            padding: 20px;
+          }
+          .main-content {
+            width: 100%;
+          }
         }
       `}</style>
     </section>

@@ -1,38 +1,26 @@
 import React, { useEffect, useState } from "react";
+import steam from "../steam.json"
 
 function GameInfo() {
   const [gameData, setGameData] = useState(null);
 
   useEffect(() => {
-    const url = "https://store.steampowered.com/api/appdetails?appids=730&cc=EU&l=es";
-
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error al obtener los datos");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Respuesta de la API:", data); // Depuración: imprime el JSON completo
-
-        if (data["730"] && data["730"].success) {
-          const gameDetails = data["730"].data;
-          setGameData({
-            title: gameDetails.name,
-            platform: "PC",
-            releaseDate: gameDetails.release_date.date,
-            description: gameDetails.short_description,
-            coverImage: gameDetails.header_image,
-          });
-        } else {
-          return(<p>"juego no encontrado"</p>);
-        }
-      
-      })
-      .catch((error) => console.error("Error al obtener los datos:", error));
+    // Accede directamente al contenido del JSON importado
+    if (steam["1245620"] && steam["1245620"].success) {
+      const gameDetails = steam["1245620"].data;
+      setGameData({
+        title: gameDetails.name, // Nombre del juego
+        platform: gameDetails.platforms.windows ? "PC" : "Other", // Verifica si está disponible en Windows
+        releaseDate: gameDetails.release_date.date, // Fecha de lanzamiento
+        description: gameDetails.short_description, // Descripción corta
+        coverImage: gameDetails.header_image, // Imagen de portada
+      });
+    } else {
+      console.error("Juego no encontrado en el archivo JSON");
+    }
   }, []);
-  return(<p>{gameData.title}</p>);
+
+
   if (!gameData) {
     return (
       <div className="loading-container">
@@ -81,21 +69,22 @@ function GameInfo() {
       <style jsx>{`
         .game-info {
           display: flex;
-          gap: 96px;
+          align-items: center; /* Centra los elementos horizontalmente */
+          gap: 20px; /* Espaciado entre los elementos */
           border-radius: 12px;
           padding: 23px 26px;
           background-color: #023844;
         }
         .game-cover {
-          width: 230px;
-          height: 345px;
-          object-fit: cover;
+          width: 460px;
+          height: 215px;
+          object-fit: fill;
         }
         .game-details {
           display: flex;
           flex-direction: column;
-          gap: 20px;
-          padding-top: 13px;
+          gap: 10px; /* Espaciado entre los campos de texto */
+          text-align: center; /* Centra el texto */
         }
         .game-title {
           color: #e6e6e6;
@@ -124,16 +113,10 @@ function GameInfo() {
           line-height: 150%;
           margin: 0;
         }
-        @media (max-width: 991px) {
-          .game-info {
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-          }
-        }
-        @media (max-width: 640px) {
+        @media (max-width: 1020px) {
           .game-info {
             padding: 15px;
+            flex-direction: column; /* Cambia la dirección a columna para apilar los elementos */
           }
           .game-title {
             font-size: 30px;
@@ -143,6 +126,13 @@ function GameInfo() {
           }
           .game-description {
             font-size: 16px;
+          }
+        }
+        @media (max-width: 450px) {
+          .game-cover {
+            width: 90%;
+            height: auto;
+            object-fit: fill;
           }
         }
       `}</style>

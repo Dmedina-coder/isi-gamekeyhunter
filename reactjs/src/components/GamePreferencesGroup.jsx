@@ -54,10 +54,10 @@ function GamePreferencesGroup() {
           margin-top: 1.5rem;
         }
         .section-title {
-          color: #ffffff;
-          margin-bottom: 0.5rem;
-          font-size: 1rem;
-          font-weight: 400;
+          font-size: 20px;
+          font-weight: 700;
+          color: rgba(179, 179, 179, 1);
+          font-family: Inter, sans-serif;
         }
         .checkbox-grid {
           display: grid;
@@ -72,7 +72,16 @@ function GamePreferencesGroup() {
           margin-right: 0.5rem;
         }
         .checkbox-label {
-          color: #ffffff;
+          font-size: 20px;
+          font-weight: 700;
+          color: rgba(179, 179, 179, 1);
+          font-family: Inter, sans-serif;
+        }
+
+        @media (max-width: 640px) {
+          .checkbox-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
         }
       `}</style>
     </div>

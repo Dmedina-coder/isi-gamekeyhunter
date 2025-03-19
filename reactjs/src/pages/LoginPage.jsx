@@ -14,38 +14,37 @@ function LoginPage() {
         </div>
       </main>
       <Footer />
-
       <style jsx>{`
         .page-container {
           display: flex;
           flex-direction: column;
-          min-height: 100vh;
+          overflow: hidden;
+          align-items: stretch;
           background-color: #022839;
         }
-
         .main-content {
           margin-left: auto;
           margin-right: auto;
-          padding-left: 40px;
-          padding-right: 40px;
+          padding-left: 0px;
+          padding-right: 0px;
           padding-top: 60px;
           padding-bottom: 60px;
-          width: 100%;
-          max-width: none;
+          width: 90%;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          align-items: stretch;
         }
-
         @media (max-width: 991px) {
           .main-content {
             max-width: 991px;
           }
         }
-
         @media (max-width: 640px) {
           .main-content {
             max-width: 640px;
           }
         }
-
         .login-container {
           width: 100%;
           max-width: 1342px;

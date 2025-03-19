@@ -1,104 +1,118 @@
 "use client";
 import React from "react";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 
 function RegistrationForm() {
+  const navigate = useNavigate(); // Initialize the navigate function
+
   return (
     <section className="form-section">
       <div className="form-container">
-        <form className="registration-form">
-          <div className="form-field">
-            <label htmlFor="email" className="field-label">
-              Email
-            </label>
+        <div className="form-fields">
+          <div className="input-group">
+            <label htmlFor="email" className="input-label">Email</label>
             <input
               id="email"
               type="email"
               placeholder="Ejemplo@email.com"
-              className="field-input"
+              className="email-input"
             />
           </div>
-
-          <div className="form-field">
-            <label htmlFor="password" className="field-label">
-              Contraseña
-            </label>
+          <div className="input-group">
+            <label htmlFor="password" className="input-label">Contraseña</label>
             <input
               id="password"
               type="password"
               value="******"
-              className="field-input"
+              className="password-input"
             />
           </div>
-
-          <div className="form-field">
-            <label htmlFor="confirm-password" className="field-label">
-              Confirma la contraseña
-            </label>
+          <div className="input-group">
+            <label htmlFor="confirm-password" className="input-label">Confirma la contraseña</label>
             <input
               id="confirm-password"
               type="password"
               value="******"
-              className="field-input"
+              className="password-input"
             />
           </div>
-
-          <div className="button-container">
-            <button type="submit" className="submit-button">
-              Registrarse
-            </button>
+          <button className="submit-button" onClick={() => navigate("/form")}>
+            Registrarse
+          </button>
           </div>
-        </form>
-      </div>
+        </div>
       <style jsx>{`
         .form-section {
+          width: 90%;
+          margin-left: auto;
+          margin-right: auto;
           background-color: #023844;
-          border-radius: 8px;
-          padding: 24px;
+          border-radius: 16px;
+          padding: 48px;
         }
+
         .form-container {
           display: flex;
           flex-direction: column;
           gap: 24px;
         }
-        .registration-form {
+
+        .form-fields {
           display: flex;
           flex-direction: column;
           gap: 24px;
         }
-        .form-field {
+
+        .input-group {
           display: flex;
           flex-direction: column;
           gap: 8px;
         }
-        .field-label {
-          color: #b3b3b3;
+
+        .input-label {
+          font-size: 20px;
           font-weight: 700;
-          font-size: 16px;
+          color: rgba(179, 179, 179, 1);
           font-family: Inter, sans-serif;
         }
-        .field-input {
-          width: 100%;
-          padding: 12px 16px;
+
+        .email-input,
+        .password-input {
+          width: auto; /* Asegura que todos tengan el mismo ancho */
+          padding: 12px; /* Igual padding para inputs y botón */
           border-radius: 8px;
-          border: 1px solid #b3b3b3;
-          background-color: #fff;
           font-size: 16px;
-          font-family: Inter, sans-serif;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          background-color: #ffffff;
+          color: rgba(179, 179, 179, 1);
         }
-        .button-container {
-          display: flex;
-          justify-content: center;
-          padding-top: 40px;
-        }
+
         .submit-button {
-          width: 100%;
-          background-color: #023844;
-          color: #f5f5f5;
-          padding: 12px 16px;
+          width: 100%; /* Asegura que todos tengan el mismo ancho */
+          padding: 12px; /* Igual padding para inputs y botón */
           border-radius: 8px;
-          border: 1px solid #b3b3b3;
-          font-family: Inter, sans-serif;
+          font-size: 16px;
+          background-color: rgba(255, 255, 255, 0.12);
+          color: rgba(245, 245, 245, 1);
+          border: none;
           cursor: pointer;
+        }
+
+        @media (max-width: 980px) {
+          .form-section {
+            padding: 30px;
+          }
+          .main-content {
+            width: 90%;
+          }
+        }
+        @media (max-width: 640px) {
+          .form-section {
+            padding: 20px;
+          }
+          .main-content {
+            width: 100%;
+          }
         }
       `}</style>
     </section>

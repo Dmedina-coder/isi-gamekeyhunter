@@ -132,7 +132,7 @@ function GameCard({ title, price, image }) {
           margin: auto 0;
           height: 100%; /* Occupy the full height of the container */
           width: 80px; /* Adjust width */
-          padding: 10px; /* Adjust padding */
+          padding: 30px; /* Adjust padding */
           margin-right: 10px; /* Add margin to the right */
           gap: 8px;
           display: flex;
@@ -141,45 +141,97 @@ function GameCard({ title, price, image }) {
         }
 
         @media (max-width: 991px) {
-          .game-card {
-            max-width: 100%;
+                    .game-card {
+            width: 100%;
+            max-height: 50px; /* Limit the height of the card */
+            align-items: flex-start;
+            overflow: hidden;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease; /* Add hover effect */
           }
-
           .game-info {
-            max-width: 100%;
+            margin: 0 0;
           }
-
           .game-content {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 0px;
+            flex-direction: row; /* Ensure image and text are side by side */
+            align-items: flex-start; /* Align items vertically */
+            gap: 16px; /* Space between the image and text */
           }
-
-          .image-column {
-            width: 100%;
-          }
-
-          .game-image {
-            margin-top: 25px;
-          }
-
-          .title-column {
-            width: 100%;
-          }
-
           .game-title {
-            margin-top: 40px;
-            font-size: 40px;
+            color: rgba(197, 197, 197, 1);
+            font-size: 14px; /* Adjust font size to fit within the limited height */
+            letter-spacing: -0.96px;
+            margin-top: 20px;
           }
-
-          .price-container {
-            white-space: initial;
+          .title-column {
+            max-height: 50px; /* Limit the height of the text */
+            display: flex;
+            flex-direction: column;
+            
           }
-
+          .image-column {
+            margin-top: 0px;
+          }
+          .game-image {
+            aspect-ratio: 1.46;
+            height: 100%; /* Ensure the image takes the full height of its container */
+            margin-top: 0px;
+            min-height: 50px; /* Limit the height of the card */
+          }
           .price-button {
-            padding: 38px 20px;
-            white-space: initial;
+            margin: 5px 0;
+            width: 80px; /* Adjust width */
+            padding: 10px; /* Adjust padding */
+            margin-right: 10px; /* Add margin to the right */
           }
+        }
+        @media (max-width: 450px) {
+          .game-card {
+            width: 100%;
+            max-height: 50px; /* Limit the height of the card */
+            align-items: flex-start;
+            overflow: hidden;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease; /* Add hover effect */
+          }
+          .game-info {
+            margin: 0 0;
+          }
+          .game-content {
+            flex-direction: row; /* Ensure image and text are side by side */
+            align-items: flex-start; /* Align items vertically */
+            gap: 16px; /* Space between the image and text */
+          }
+          .game-title {
+            color: rgba(197, 197, 197, 1);
+            font-size: 14px; /* Adjust font size to fit within the limited height */
+            letter-spacing: -0.96px;
+            margin-top: 20px;
+          }
+          .title-column {
+            max-height: 50px; /* Limit the height of the text */
+            display: flex;
+            flex-direction: column;
+            
+          }
+          .image-column {
+            margin-top: 0px;
+          }
+          .game-image {
+            aspect-ratio: 1.46;
+            height: 100%; /* Ensure the image takes the full height of its container */
+            margin-top: 0px;
+            min-height: 50px; /* Limit the height of the card */
+          }
+          .price-button {
+            margin: 5px 0;
+            width: 80px; /* Adjust width */
+            padding: 10px; /* Adjust padding */
+            margin-right: 10px; /* Add margin to the right */
+          }
+            
         }
       `}</style>
     </Link>

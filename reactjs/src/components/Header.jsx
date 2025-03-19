@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import logo from "../media/Logo_web.png"; // Import the logo image
 import banner from "../media/Banner_web.png"; // Import the banner image
+import loginIcon from "../media/login_icon.png"; // Import the login icon image
 
 function Header() {
   const [searchText, setSearchText] = useState("");
@@ -37,6 +38,13 @@ function Header() {
             className="logo-text"
           />
         </Link>
+        <button className="login-button" onClick={() => navigate("/login")}>
+          <img
+            src={loginIcon}
+            alt="Login"
+            className="login-icon"
+          />
+        </button>
       </div>
       <form className="search-bar" onSubmit={handleSearchSubmit}>
         <div className="search-layer">
@@ -64,21 +72,23 @@ function Header() {
       <style jsx>{`
         .header {
           background-color: rgba(6, 31, 46, 1);
-          width: 100%;
+          min-width: 100%;
           padding: 18px 43px 34px;
-          overflow: hidden;
+          overflow: clip;
+          position: relative;
         }
 
         .logo-container {
           display: flex;
           align-items: center; /* Align items vertically */
-          justify-content: space-between; /* Add spacing between logo and banner */
           width: 100%;
-          max-width: 1146px;
-          gap: 20px; /* Adjust gap between logo and banner */
+          gap: 0px; /* Adjust gap between logo and banner */
+          position: relative; /* Ensure child elements with absolute positioning are aligned relative to this container */
+          padding-top: 0px;
         }
 
         .logo {
+          display: none;
           aspect-ratio: 2.03;
           object-fit: contain;
           object-position: center;
@@ -94,29 +104,42 @@ function Header() {
           flex-shrink: 0;
         }
 
+        .login-button {
+          cursor: pointer;
+          margin-left: auto; /* Align the button to the right */
+          object-fit: contain;
+          background: none;
+          object-position: center;
+          flex-shrink: 0;
+          border: none;
+          margin-right: 80px; /* Adjusted margin for the button */
+        }
+
+        .login-icon {
+          width: 80px;
+          height: 80px;
+        }
+
         .search-bar {
           justify-content: start; /* Align items to the left */
           align-items: stretch;
           border-radius: 28px;
           background-color: #fff;
           display: flex;
-          margin: 1px 0; /* Remove horizontal centering */
+          margin: px 0; /* Remove horizontal centering */
           min-height: 61px;
-          width: 95%; /* Adjusted width of the search bar */
-          gap: 4px;
+          width: 96%; /* Adjusted width of the search bar */
+          gap: 0px;
           overflow: hidden;
         }
 
         .search-layer {
           background-color: rgba(239, 238, 227, 1);
           display: flex;
-          min-width: 100%;
           width: 100%;
           padding: 4px;
-          align-items: stretch;
-          gap: 4px;
+          gap: 0px;
           justify-content: start;
-          flex-wrap: wrap;
           height: 100%;
           flex: 1;
           flex-shrink: 1;
@@ -192,16 +215,16 @@ function Header() {
           margin: auto 0;
         }
 
-        @media (max-width: 1140px) {
-          .logo-text {
-            display: none; /* Hide the banner on smaller screens */
-          }
-        }
-
-        @media (max-width: 991px) {
+        @media (max-width: 1300px) {
           .header {
             max-width: 100%;
             padding: 18px 20px 34px;
+          }
+
+          .login-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: -30px; /* Adjusted margin for the button */
           }
 
           .logo-container {
@@ -210,10 +233,12 @@ function Header() {
 
           .logo {
             height: 60px; /* Adjust logo size for smaller screens */
+            display: block; /* Show the logo on smaller screens */
           }
 
           .logo-text {
             height: 120px; /* Adjust banner size for smaller screens */
+            display: none; /* Hide the banner text */
           }
 
           .search-bar {
@@ -252,6 +277,7 @@ function Header() {
         @media (max-width: 600px) {
           .logo {
             height: 50px; /* Adjust logo size for even smaller screens */
+            display: block; /* Show the logo on even smaller screens */
           }
 
           .logo-text {

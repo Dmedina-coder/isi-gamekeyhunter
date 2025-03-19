@@ -1,28 +1,17 @@
 import * as React from "react";
+import StoreItem from "./StoreItem";
 
 function StoreRecommendation({ storeName, platform, price, storeLogoUrl, platformLogoUrl }) {
   return (
     <div className="recommendation-container">
       <h2 className="recommendation-title">NUESTRA RECOMENDACIÓN</h2>
-      <div className="store-info">
-        <div className="store-details">
-          <img
-            src={storeLogoUrl}
-            alt="Store logo"
-            className="store-logo"
+      <StoreItem
+            key={"1"}
+            storeName={"G2A"} 
+            price={"99,99 €"}
+            storeLogoUrl={"https://www.g2a.com/static/assets/favicon.ico"}
+            storeUrl={"https://www.g2a.com/?adid=GA-ES_PEB_ON_SK_KEY_PURE_BRAND-English&id=35&utm_medium=cpc&utm_source=google&utm_campaign=GA-ES_PEB_ON_SK_KEY_PURE_BRAND-English&utm_id=310893744&gad_source=1&gclid=Cj0KCQjw1um-BhDtARIsABjU5x5-L-NTjHcnl1QpvOJef9CjpMJEbPG1U1nuJEGfkGAunIvxxU4oeosaAsUOEALw_wcB&gclsrc=aw.ds"}
           />
-          <span className="store-name">{storeName}</span>
-        </div>
-        <div className="platform-details">
-          <img
-            src={platformLogoUrl}
-            alt="Platform logo"
-            className="platform-logo"
-          />
-          <span className="platform-name">{platform}</span>
-        </div>
-        <div className="price">{price}</div>
-      </div>
       <style jsx>{`
         .recommendation-container {
           padding-bottom: 22px;

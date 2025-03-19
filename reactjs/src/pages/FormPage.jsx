@@ -6,33 +6,56 @@ import Footer from "../components/Footer";
 
 function FormPage() {
   return (
-    <>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet"
-      />
-      <main className="app-container">
-        <div className="content-wrapper">
-          <Header />
+    <div className="page-container">
+      <Header />
+      <main className="main-container">
+        <div className="form-container">
           <UserForm />
-          <Footer />
         </div>
       </main>
+      <Footer />
       <style jsx>{`
-        .app-container {
-          min-height: screen;
-          background-color: #001720;
-          font-family: Inter;
+        .page-container {
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          align-items: stretch;
+          background-color: #022839;
         }
-        .content-wrapper {
-          max-width: 1442px;
+        .main-container {
           margin-left: auto;
           margin-right: auto;
-          padding-left: 1rem;
-          padding-right: 1rem;
+          padding-left: 0px;
+          padding-right: 0px;
+          padding-top: 60px;
+          padding-bottom: 60px;
+          width: 90%;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          align-items: stretch;
+          
+        }
+        @media (max-width: 991px) {
+          .main-content {
+            max-width: 991px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .main-content {
+            max-width: 640px;
+          }
+        }
+
+        .form-container {
+          width: 100%;
+          max-width: 1342px;
+          margin-left: auto;
+          margin-right: auto;
         }
       `}</style>
-    </>
+    </div>
   );
 }
 

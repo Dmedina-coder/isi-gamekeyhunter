@@ -3,7 +3,7 @@ import React from "react";
 import img from "../media/Game.webp";
 
 import Header from "../components/Header";
-//import Slider from "./Slider";
+import Slider from "../components/Slider";
 import NewsSection from "../components/FreeSection";
 import GameList from "../components/GameList";
 import TestimonialSection from "../components/TestimonialSection";
@@ -85,6 +85,7 @@ function Home() {
   return (
     <main className="home">
       <Header />
+      <Slider />
       <NewsSection />
       <GameList
         title="TOP 5 MAS BUSCADOS"

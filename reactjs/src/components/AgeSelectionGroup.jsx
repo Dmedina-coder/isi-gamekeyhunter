@@ -22,17 +22,18 @@ function AgeSelectionGroup() {
       <h3 className="section-title">Sobre ti:</h3>
       <h4 className="subsection-title">Tu edad</h4>
 
-      <div className="checkbox-grid">
+      <div className="radio-grid">
         {ageRanges.map((range, index) => (
-          <div className="checkbox-item" key={index}>
+          <div className="radio-item" key={index}>
             <input
-              type="checkbox"
+              type="radio"
               id={`age-${index}`}
-              className="checkbox-input"
+              name="age-group" /* Agrupa los botones de radio */
+              className="radio-input"
               checked={selectedAge === index}
               onChange={() => handleAgeChange(index)}
             />
-            <label htmlFor={`age-${index}`} className="checkbox-label">
+            <label htmlFor={`age-${index}`} className="radio-label">
               {range}
             </label>
           </div>
@@ -44,31 +45,39 @@ function AgeSelectionGroup() {
           margin-top: 1.5rem;
         }
         .section-title {
-          color: #ffffff;
-          margin-bottom: 1rem;
-          font-size: 1rem;
-          font-weight: 500;
+          font-size: 20px;
+          font-weight: 700;
+          color: rgba(179, 179, 179, 1);
+          font-family: Inter, sans-serif;
         }
         .subsection-title {
-          color: #ffffff;
-          margin-bottom: 0.5rem;
-          font-size: 1rem;
-          font-weight: 400;
+          font-size: 20px;
+          font-weight: 700;
+          color: rgba(179, 179, 179, 1);
+          font-family: Inter, sans-serif;
         }
-        .checkbox-grid {
+        .radio-grid {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 1rem;
         }
-        .checkbox-item {
+        .radio-item {
           display: flex;
           align-items: center;
         }
-        .checkbox-input {
+        .radio-input {
           margin-right: 0.5rem;
         }
-        .checkbox-label {
-          color: #ffffff;
+        .radio-label {
+          font-size: 20px;
+          font-weight: 700;
+          color: rgba(179, 179, 179, 1);
+          font-family: Inter, sans-serif;
+        }
+        @media (max-width: 640px) {
+          .radio-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
         }
       `}</style>
     </div>

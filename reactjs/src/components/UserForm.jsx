@@ -110,40 +110,62 @@ function UserForm() {
 
       <style jsx>{`
         .form-section {
-          margin-top: 2rem;
-          background-color: #002a36;
-          border-radius: 0.5rem;
-          padding: 2rem;
+          width: 90%;
+          margin-left: auto;
+          margin-right: auto;
+          background-color: #023844;
+          border-radius: 16px;
+          padding: 48px;
         }
         .user-form {
           display: grid;
           gap: 1.5rem;
         }
         .form-group {
-          display: grid;
-          gap: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
         }
         .form-label {
-          color: #ffffff;
+          font-size: 20px;
+          font-weight: 700;
+          color: rgba(179, 179, 179, 1);
+          font-family: Inter, sans-serif;
         }
         .form-input {
-          width: 100%;
-          padding-left: 1rem;
-          padding-right: 1rem;
-          padding-top: 0.5rem;
-          padding-bottom: 0.5rem;
-          border-radius: 0.25rem;
+          width: auto; /* Asegura que todos tengan el mismo ancho */
+          padding: 12px; /* Igual padding para inputs y botón */
+          border-radius: 8px;
+          font-size: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
           background-color: #ffffff;
+          color: rgba(179, 179, 179, 1);
         }
         .submit-button {
-          width: 100%;
-          margin-top: 2rem;
-          background-color: #1a1a1a;
-          color: #ffffff;
-          padding-top: 0.75rem;
-          padding-bottom: 0.75rem;
-          border-radius: 0.25rem;
+          width: 100%; /* Asegura que todos tengan el mismo ancho */
+          padding: 12px; /* Igual padding para inputs y botón */
+          border-radius: 8px;
+          font-size: 16px;
+          background-color: rgba(255, 255, 255, 0.12);
+          color: rgba(245, 245, 245, 1);
+          border: none;
           cursor: pointer;
+        }
+        @media (max-width: 980px) {
+          .form-section {
+            padding: 30px;
+          }
+          .main-content {
+            width: 90%;
+          }
+        }
+        @media (max-width: 640px) {
+          .form-section {
+            padding: 20px;
+          }
+          .main-content {
+            width: 100%;
+          }
         }
       `}</style>
     </section>

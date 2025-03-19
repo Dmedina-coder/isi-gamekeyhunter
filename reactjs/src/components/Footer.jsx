@@ -6,7 +6,7 @@ function Footer() {
       <div className="divider"></div>
       <div className="footer-content">
         <div className="footer-info">
-          <h2 className="site-name">Site name</h2>
+          <h2 className="site-name">GameKey Hunter</h2>
           <div className="social-icons">
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/199c9a3c64fa87237dabe74b1aff1fe617935141f37a07ba364b7012e90e628c?placeholderIfAbsent=true&apiKey=f682e8de3cb14cc19333c5fafcca59c5"
@@ -32,34 +32,6 @@ function Footer() {
         </div>
         <div className="footer-links">
           <div className="footer-columns">
-            <div className="footer-column">
-              <div className="link-group">
-                <h3 className="link-topic">Topic</h3>
-                <a href="#" className="link-page">
-                  Page
-                </a>
-                <a href="#" className="link-page">
-                  Page
-                </a>
-                <a href="#" className="link-page">
-                  Page
-                </a>
-              </div>
-            </div>
-            <div className="footer-column">
-              <div className="link-group">
-                <h3 className="link-topic">Topic</h3>
-                <a href="#" className="link-page">
-                  Page
-                </a>
-                <a href="#" className="link-page">
-                  Page
-                </a>
-                <a href="#" className="link-page">
-                  Page
-                </a>
-              </div>
-            </div>
             <div className="footer-column">
               <div className="link-group">
                 <h3 className="link-topic">Topic</h3>

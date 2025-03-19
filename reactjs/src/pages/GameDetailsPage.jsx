@@ -40,11 +40,10 @@ function GameDetailsPage() {
       </div>
       <style jsx>{`
         .page-container {
-          max-width: none;
-          margin-left: auto;
-          margin-right: auto;
-          min-height: 100vh;
-          width: 100%;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          align-items: stretch;
           background-color: #022839;
         }
         .main-content {

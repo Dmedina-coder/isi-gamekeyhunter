@@ -1,31 +1,79 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import StoreItem from "./StoreItem";
+import CheapShark from "../cheapshark.json"
+import Stores from "../store.json"
 
 function StoreList() {
-  // Sample store data - in a real app, this would come from props or an API
-  const stores = [
-    { id: 1, name: "Nombre Tienda", platform: "Plataforma", price: "99.99€", logoUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c3695b93a052d93070c48846c2bc5631dce5e61" },
-    { id: 2, name: "Nombre Tienda", platform: "Plataforma", price: "99.99€", logoUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c3695b93a052d93070c48846c2bc5631dce5e61" },
-    { id: 3, name: "Nombre Tienda", platform: "Plataforma", price: "99.99€", logoUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c3695b93a052d93070c48846c2bc5631dce5e61" },
-    { id: 4, name: "Nombre Tienda", platform: "Plataforma", price: "99.99€", logoUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c3695b93a052d93070c48846c2bc5631dce5e61" },
-    { id: 5, name: "Nombre Tienda", platform: "Plataforma", price: "99.99€", logoUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c3695b93a052d93070c48846c2bc5631dce5e61" },
-    { id: 6, name: "Nombre Tienda", platform: "Plataforma", price: "99.99€", logoUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c3695b93a052d93070c48846c2bc5631dce5e61" },
-    { id: 7, name: "Nombre Tienda", platform: "Plataforma", price: "99.99€", logoUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c3695b93a052d93070c48846c2bc5631dce5e61" },
-    { id: 8, name: "Nombre Tienda", platform: "Plataforma", price: "99.99€", logoUrl: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c3695b93a052d93070c48846c2bc5631dce5e61" }
-  ];
+
+  const [deals, setDeals] = useState([]);
+  const [stores, setStores] = useState([]);
+
+  useEffect(() => {
+    // Accede directamente al contenido del JSON importado
+    if (CheapShark.deals) {
+      setDeals(CheapShark.deals);
+    } else {
+      console.error("No se encontraron ofertas en el archivo JSON");
+    }
+  }, []);
+
+  useEffect(() => {
+    // Accede directamente al contenido del JSON importado
+    if (Stores) {
+      setStores(Stores);
+    } else {
+      console.error("No se encontraron tiendas en el archivo JSON");
+    }
+  }, []);
+
+  if (deals.length === 0 || stores.length === 0) {
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <style jsx>{`
+          .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+          .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+          }
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   return (
     <section className="store-list">
-      {stores.map(store => (
-        <StoreItem
-          key={store.id}
-          storeName={store.name}
-          platform={store.platform}
-          price={store.price}
-          storeLogoUrl={store.logoUrl}
-          platformLogoUrl={store.logoUrl}
-        />
-      ))}
+      {deals.map((deal) => {
+        // Buscar la tienda correspondiente en el JSON de Stores
+        const store = stores.find((store) => store.storeID === deal.storeID);
+
+        return (
+          <StoreItem
+            key={deal.storeID}
+            storeName={store ? store.storeName : "Unknown Store"} // Mostrar el nombre de la tienda si se encuentra
+            price={`${deal.price} €`}
+            storeLogoUrl={`https://www.cheapshark.com/img/stores/icons/${Number(deal.storeID) - 1}.png?v=1.0`}
+            storeUrl={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}&k=1`}
+          />
+        );
+      })}
       <style jsx>{`
         .store-list {
           padding: 24px 0;
