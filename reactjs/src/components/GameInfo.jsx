@@ -129,10 +129,19 @@ function GameInfo() {
           }
         }
         @media (max-width: 450px) {
+          .game-info {
+            padding: 0px 0px 20px 0px;
+
+          }
           .game-cover {
-            width: 90%;
-            height: auto;
-            object-fit: fill;
+            border-radius: 12px 12px 0px 0px;
+            overflow: hidden;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+          }
+          .game-description {
+            margin: 0 20px;
           }
         }
       `}</style>

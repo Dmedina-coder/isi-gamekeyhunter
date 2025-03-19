@@ -71,17 +71,11 @@ function StoreItem({ storeName, price, storeLogoUrl, storeUrl }) {
         }
         @media (max-width: 640px) {
           .store-item {
-            flex-direction: column;
-            gap: 15px;
+            gap: 5px;
             align-items: center;
           }
-          .platform-details {
-            margin-left: 0;
-          }
           .price {
-            width: 100%;
-            text-align: center;
-            margin-left: 0;
+            margin-left: auto;
           }
         }
       `}</style>
